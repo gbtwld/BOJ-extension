@@ -8,13 +8,16 @@ import { tierAxios } from "../libs/tierAxios";
 
 export function createProblem(context: vscode.ExtensionContext) {
     const input = vscode.window.createInputBox();
+
     input.prompt = "문제 번호를 입력해주세요.";
     input.placeholder = "예: 1000";
+
     input.onDidChangeValue(async (e) => {
         if (e) {
             input.title = (await searchProblem(e, context)).title;
         }
     });
+
     input.onDidAccept(async () => {
         const problemNumber = input.value;
         if (!problemNumber) {
